@@ -18,6 +18,16 @@ a{
 li{
 	list-style: none;
 }
+/*重写MUI样式*/
+.mui-pull-bottom-tips {
+    text-align: center;
+    background-color: #efeff4;
+    font-size: 15px;
+    line-height: 40px;
+    color: #777;
+}
+/*mui重写结束*/
+
 .main_banner{
 	height: 4rem;
 	width: 100%;
@@ -60,7 +70,6 @@ li{
 	margin-bottom: 0.133333rem;
 }
 .warp:nth-last-child(1){
-	background: #fff;
 	margin-bottom: 0;
 }
 .yg_list li{
@@ -137,13 +146,23 @@ and (max-device-width : 1024px){
 }
 
 /*医生推荐*/
+.doct_view{
+	height: 13.333333rem;
+	position: relative;
+}
 .doct_list{
-	padding-left: 0.4rem;
+
 }
 .doct_list li{
-	float: left;
-	width: 50%;
-	padding-bottom: 0.4rem;
+	width: 100%;
+	padding: 0.4rem;
+	border-bottom: 2px solid #F2F2F2;
+}
+.doct_list li:nth-child(1){
+	padding-top: 0;
+}
+.doct_list li:nth-last-child(1){
+	border-bottom: 0;
 }
 .doct_list li>img{
 	display: block;

@@ -52,33 +52,94 @@
 				</li>
 			</ul>
 		</div>
-		<!--医生推荐-->
+		<!--医生推荐 下拉刷新-->
 		<div class="warp">
 			<p class="item_tit">医生推荐</p>
-			<ul class="doct_list clearfix">
-				<li class="clearfix">
-					<img src="img/keshi.png"/>
-					<div class="doc_info">
-						<p class="doc_name">张三<span>男</span></p>
-						<p class="doc_dep">内科</p>
-					</div>
-				</li>
-				<li class="clearfix">
-					<img src="img/keshi.png"/>
-					<div class="doc_info">
-						<p class="doc_name">西门吹雪<span>男</span></p>
-						<p class="doc_dep">内科</p>
-					</div>
-				</li>
-			</ul>
+			<div class="doct_view">
+				<div class="mui-slider-group">
+				<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+				  <div class="mui-scroll">
+				    <!--数据列表-->
+				    <ul class="mui-table-view mui-table-view-chevron doct_list">
+	      				<li class="clearfix">
+							<img src="img/keshi.png"/>
+							<div class="doc_info">
+								<p class="doc_name">张三<span>男</span></p>
+								<p class="doc_dep">内科</p>
+							</div>
+						</li>
+						<li class="clearfix">
+							<img src="img/keshi.png"/>
+							<div class="doc_info">
+								<p class="doc_name">张三<span>男</span></p>
+								<p class="doc_dep">内科</p>
+							</div>
+						</li>
+						<li class="clearfix">
+							<img src="img/keshi.png"/>
+							<div class="doc_info">
+								<p class="doc_name">张三<span>男</span></p>
+								<p class="doc_dep">内科</p>
+							</div>
+						</li>
+				    </ul>
+				  </div>
+				</div>
+				</div>
+			</div>
 		</div>
 		<script src="js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/lib/mui.pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/lib/mui.pullToRefresh.material.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			var gallery = mui('.mui-slider');
 			gallery.slider({
 			  interval:5000//自动轮播周期，若为0则不自动播放。
 			});
+			(function($) {
+				//阻尼系数
+				var deceleration = mui.os.ios?0.003:0.0009;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration:deceleration
+				});
+				$.ready(function() {
+					//循环初始化所有下拉刷新，上拉加载。
+					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+						$(pullRefreshEl).pullToRefresh({
+							up: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('.mui-table-view');
+										ul.appendChild(createFragment(ul, index, 3));
+										self.endPullUpToRefresh();
+									}, 1000);
+								}
+							}
+						});
+					});
+					var createFragment = function(ul, index, count, reverse) {
+						var length = ul.querySelectorAll('li').length;
+						var fragment = document.createDocumentFragment();
+						var li;
+						for (var i = 0; i < count; i++) {
+							li = document.createElement('li');
+							li.className = "clearfix"
+							 	
+							li.innerHTML =		'<img src="img/keshi.png"/>'+
+												'<div class="doc_info">'+
+													'<p class="doc_name">张三<span>男</span></p>'+
+													'<p class="doc_dep">内科</p>'+
+												'</div>';
+							fragment.appendChild(li);
+						}
+						return fragment;
+					};
+				});
+			})(mui);
 		</script>
 	</body>
 </html>
