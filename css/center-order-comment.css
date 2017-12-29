@@ -159,6 +159,36 @@ input {
 .order_info li .select_div ul.ul_show {
   display: block;
 }
+.order_info li .radio_div {
+  width: 75%;
+  float: left;
+  background: #fff;
+  margin: 0;
+  height: 0.933333rem;
+  line-height: 0.933333rem;
+  padding: 0;
+  color: #333;
+  font-size: 14px;
+  text-indent: 0.266666rem;
+  border-radius: 0.066666rem;
+  position: relative;
+  overflow: hidden;
+}
+.order_info li .radio_div label {
+  font-size: 14px;
+  margin-right: 0.266666rem;
+}
+.order_info li .radio_div input[type="radio"] {
+  width: 0.4rem;
+  height: 0.4rem;
+  float: none;
+  background: #fff;
+  margin: 0;
+  margin-right: 0.133333rem;
+  color: #333;
+  font-size: 14px;
+  vertical-align: middle;
+}
 .order_info li .left_select {
   width: 55% !important;
   margin-right: 5% !important;
